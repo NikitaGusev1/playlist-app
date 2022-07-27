@@ -1,8 +1,9 @@
-import { AppNavigator } from './navigation/AppNavigator';
-import { defaultTheme } from './theme/defaultTheme';
 import React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ThemeProvider } from 'styled-components/native';
+
+import { AppNavigator } from './navigation/AppNavigator';
+import { defaultTheme } from './theme/defaultTheme';
 
 const App = () => {
   return (
