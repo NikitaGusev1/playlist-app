@@ -11,6 +11,7 @@ const defaultTheme = {
   sizes: {
     spacing: 8,
     appPadding: 16,
+    header: 24,
   },
 };
 

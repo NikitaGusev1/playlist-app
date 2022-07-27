@@ -5,7 +5,7 @@ import { MainText } from '../typography/MainText';
 
 export const HomeScreen = () => {
   return (
-    <AppLayout withPadding={true} withoutScrollView={false}>
+    <AppLayout withPadding={true} withHeader={true}>
       <MainText>template</MainText>
     </AppLayout>
   );
