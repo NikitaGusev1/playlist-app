@@ -5,17 +5,17 @@ import styled, { css } from 'styled-components/native';
 interface IProps {
   children: React.ReactElement[] | React.ReactElement;
   withPadding?: boolean;
-  disableScroll?: boolean;
+  withoutScrollView?: boolean;
 }
 
 export const AppLayout = ({
   children,
   withPadding = false,
-  disableScroll = false,
+  withoutScrollView = false,
 }: IProps) => {
   return (
     <Container>
-      {disableScroll ? (
+      {withoutScrollView ? (
         <ContentView withPadding={withPadding}>{children}</ContentView>
       ) : (
         <Scroll withPadding={withPadding}>{children}</Scroll>
