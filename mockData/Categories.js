@@ -115,7 +115,8 @@ export const categories = {
       'The Dance',
       4,
       22,
-      'https://upload.wikimedia.org/wikipedia/en/7/76/Garth_Brooks_-_The_Dance.jpg',
+      5,
+      'https://i.scdn.co/image/ab67616d0000b2733480d5fc1a12593de2567c62',
     ),
     new Song(
       'John Denver',

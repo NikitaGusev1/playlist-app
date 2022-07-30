@@ -1,17 +1,25 @@
 import React from 'react';
+import { StyleProp, TextProps } from 'react-native';
 import { BorderlessButton } from 'react-native-gesture-handler';
 import styled, { css } from 'styled-components/native';
 
 interface IProps {
   children: string;
   onPress?: () => void;
+  style?: StyleProp<TextProps>;
 }
 
-export const MainText = ({ children, onPress }: IProps) => {
+export const MainText = ({ children, onPress, style }: IProps) => {
   return (
-    <BorderlessButton onPress={onPress}>
-      <StyledText>{children}</StyledText>
-    </BorderlessButton>
+    <>
+      {typeof onPress === 'function' ? (
+        <BorderlessButton onPress={onPress}>
+          <StyledText style={style}>{children}</StyledText>
+        </BorderlessButton>
+      ) : (
+        <StyledText style={style}>{children}</StyledText>
+      )}
+    </>
   );
 };
 
