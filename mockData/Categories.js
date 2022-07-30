@@ -3,6 +3,30 @@ import { Song } from './Song';
 export const categories = {
   jazz: [
     new Song(
+      'Herbie Hancock',
+      'Cantaloupe Island',
+      4,
+      30,
+      6.7,
+      'https://i.scdn.co/image/ab67616d0000b273db1a2b8396094329afcbbe43',
+    ),
+    new Song(
+      'Ella Fitzgerald',
+      'Mack The Knife',
+      4,
+      50,
+      4.2,
+      'https://m.media-amazon.com/images/I/71FG-QxLCyL._SL1052_.jpg',
+    ),
+    new Song(
+      'Fats Waller',
+      'Honeysuckle Rose',
+      3,
+      23,
+      6.5,
+      'https://i.ytimg.com/vi/-F6n_12c9bo/sddefault.jpg',
+    ),
+    new Song(
       'Miles Davis',
       'So What',
       4,
@@ -53,6 +77,30 @@ export const categories = {
   ],
   rock: [
     new Song(
+      'Thin Lizzy',
+      'The Boys Are Back in Town',
+      5,
+      15,
+      7.2,
+      'https://i.scdn.co/image/ab67616d0000b273bb6e24a141d5af7d45fcbfdb',
+    ),
+    new Song(
+      'James Gang',
+      'Funk #49',
+      6,
+      12,
+      4.4,
+      'https://upload.wikimedia.org/wikipedia/en/9/9c/Funk_49.jpg',
+    ),
+    new Song(
+      'Joan Jett & the Blackhearts',
+      "I Love Rock 'n' Roll",
+      3,
+      32,
+      7.6,
+      'https://i.ytimg.com/vi/d9jhDwxt22Y/maxresdefault.jpg',
+    ),
+    new Song(
       'Led Zeppelin',
       'Whole Lotta Love',
       3,
@@ -95,6 +143,30 @@ export const categories = {
   ],
   country: [
     new Song(
+      'C.W. McCall',
+      'Convoy',
+      5,
+      22,
+      8.2,
+      'https://images.genius.com/18ab72172038d08fc71ad2f84ad9d64a.600x600x1.jpg',
+    ),
+    new Song(
+      'Harry Choates',
+      'Jole Blon',
+      4,
+      11,
+      9.2,
+      'https://i.discogs.com/BxbLxS1N0xvGVme7EPstVz6ghbBN3n1C7vwHPoJoLnM/rs:fit/g:sm/q:90/h:400/w:397/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ1MzIx/NjctMTM3NjcwNTMw/Ny02NzM0LmpwZWc.jpeg',
+    ),
+    new Song(
+      'Brad Paisley',
+      'Welcome to the Future',
+      4,
+      10,
+      5.5,
+      'https://i.ytimg.com/vi/PnRoSDVoc30/maxresdefault.jpg',
+    ),
+    new Song(
       'Johnny Cash',
       'I Walk the Line',
       2,
@@ -136,6 +208,30 @@ export const categories = {
     ),
   ],
   pop: [
+    new Song(
+      'The Weeknd',
+      'Blinding Lights',
+      4,
+      14,
+      7.8,
+      'https://media.timeout.com/images/105804280/380/285/image.jpg',
+    ),
+    new Song(
+      'Amy Winehouse',
+      'Rehab',
+      5,
+      12,
+      10,
+      'https://media.timeout.com/images/105804266/380/285/image.jpg',
+    ),
+    new Song(
+      'Katy Perry',
+      'Firework',
+      4,
+      12,
+      6.7,
+      'https://c-fa.cdn.smule.com/rs-s79/arr/3b/4a/b479ae98-74cb-4f35-b823-a1e3fae5858b_1024.jpg',
+    ),
     new Song(
       'Beyoncé',
       'Single Ladies (Put a Ring on It)',
