@@ -10,4 +10,7 @@ export const strings = {
     [ECategories.Country]: 'Country',
     [ECategories.Pop]: 'Pop',
   },
+  megabytes: 'MB',
+  minutes: 'm',
+  seconds: 's',
 };

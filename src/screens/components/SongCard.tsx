@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import FastImage from 'react-native-fast-image';
 import styled, { css } from 'styled-components/native';
 
+import { strings } from '../../strings/strings';
 import { ISong } from '../../typescript/types';
 import { MainText } from '../../typography';
 
@@ -11,7 +12,7 @@ interface IProps {
 }
 
 export const SongCard = ({ data }: IProps) => {
-  const { image, title, size, minutes, seconds } = data;
+  const { image, title, size, minutes, seconds, artist } = data;
   const { onLayout, width } = useLayout();
 
   const imageDimensions = useMemo(() => {
@@ -36,10 +37,10 @@ export const SongCard = ({ data }: IProps) => {
           ) : null}
         </>
       </ImageContainer>
-      <Title>{title}</Title>
+      <Title>{`${artist} - ${title}`}</Title>
       <Info>
-        <Size>{`${size} MB`}</Size>
-        <Length>{`${minutes}m ${seconds}s`}</Length>
+        <Size>{`${size} ${strings.megabytes}`}</Size>
+        <Length>{`${minutes}${strings.minutes} ${seconds}${strings.seconds}`}</Length>
       </Info>
     </Container>
   );
@@ -48,12 +49,14 @@ export const SongCard = ({ data }: IProps) => {
 const Container = styled.View`
   ${({ theme }) => css`
     padding: ${theme.sizes.getSpacing(2.5)}px ${theme.sizes.appPadding}px;
+    width: ${theme.sizes.categoryContainerWidth}px;
+    margin-right: ${theme.sizes.appPadding}px;
   `}
 `;
 
 const ImageContainer = styled.View`
   ${({ theme }) => css`
-    width: ${theme.sizes.categoryImageContainerWidth}px;
+    width: ${theme.sizes.categoryContainerWidth}px;
     margin-bottom: ${theme.sizes.spacing}px;
   `}
 `;
@@ -68,6 +71,7 @@ const StyledImage = styled(FastImage)<{ width: number; height: number }>`
 const Title = styled(MainText)`
   ${({ theme }) => css`
     margin-bottom: ${theme.sizes.spacing / 2}px;
+    flex: 1;
   `}
 `;
 

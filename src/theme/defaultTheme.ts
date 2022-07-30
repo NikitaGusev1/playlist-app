@@ -14,7 +14,7 @@ const defaultTheme = {
     appPadding: 16,
     header: 24,
     getSpacing: (multiplier: number) => multiplier * defaultTheme.sizes.spacing,
-    categoryImageContainerWidth: 200,
+    categoryContainerWidth: 200,
   },
 
   font: {

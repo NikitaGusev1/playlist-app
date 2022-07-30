@@ -8,19 +8,22 @@ import { ECategories } from '../typescript/statics/ECategories';
 import { Category } from './components/Category';
 
 export const HomeScreen = () => {
-  const data = categories;
+  const songsData = categories;
 
   const renderCategory = useCallback(
     (category: ECategories) => {
+      const shuffled = songsData[category].sort(() => 0.5 - Math.random());
+      const selected = shuffled.slice(0, 5);
+
       return (
         <Category
-          data={data[category]}
+          data={selected}
           title={strings.categories[category]}
           key={category}
         />
       );
     },
-    [data],
+    [songsData],
   );
 
   return (

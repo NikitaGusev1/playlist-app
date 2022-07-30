@@ -17,7 +17,6 @@ export const Category = ({ data, title }: IProps) => {
   console.log(data);
 
   const renderSong: ListRenderItem<ISong> = useCallback(({ item }) => {
-    // TODO animate view with stiffness(1), limit to 5 random songs
     return <SongCard data={item} />;
   }, []);
 
@@ -46,6 +45,7 @@ const Container = styled.View`
 
 const Header = styled.View`
   flex-direction: row;
+  align-items: center;
 `;
 
 const SeeAllButton = styled(MainButton)`

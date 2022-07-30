@@ -3,7 +3,7 @@ import { StyleProp, TextProps } from 'react-native';
 import { BorderlessButton } from 'react-native-gesture-handler';
 import styled, { css } from 'styled-components/native';
 
-interface IProps {
+interface IProps extends TextProps {
   children: string;
   onPress?: () => void;
   style?: StyleProp<TextProps>;
