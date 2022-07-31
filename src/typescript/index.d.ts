@@ -1,6 +1,7 @@
-import { EAppScreens } from './statics/EAppScreens';
 import { NavigationProp } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+import { EAppScreens } from './statics/EAppScreens';
 
 declare global {
   namespace ReactNavigation {
@@ -13,6 +14,7 @@ type ScreenParamList = {
    * All app screen param types go here. Params are undefined by default for all app screens.
    * example: [EAppScreens.Home]: { step: 0 };
    */
+  [EAppScreens.AllSongs]: { title: string };
 };
 
 type NavigationScreensParamList = Override<
