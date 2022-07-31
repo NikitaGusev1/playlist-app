@@ -21,11 +21,7 @@ export const HomeScreen = () => {
       return (
         <>
           {selected && !isEmpty(selected) ? (
-            <Category
-              data={selected}
-              title={strings.categories[category]}
-              key={category}
-            />
+            <Category data={selected} category={category} key={category} />
           ) : null}
         </>
       );

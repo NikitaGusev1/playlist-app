@@ -6,16 +6,17 @@ import styled, { css } from 'styled-components/native';
 import { MainButton } from '../../components/buttons/MainButton';
 import { strings } from '../../strings/strings';
 import { EAppScreens } from '../../typescript/statics/EAppScreens';
+import { ECategories } from '../../typescript/statics/ECategories';
 import { ISong } from '../../typescript/types';
 import { HeaderText } from '../../typography';
 import { SongCard } from './SongCard';
 
 interface IProps {
   data: ISong[];
-  title: string;
+  category: ECategories;
 }
 
-export const Category = ({ data, title }: IProps) => {
+export const Category = ({ data, category }: IProps) => {
   const navigation = useNavigation();
 
   const renderSong: ListRenderItem<ISong> = useCallback(({ item }) => {
@@ -25,11 +26,12 @@ export const Category = ({ data, title }: IProps) => {
   return (
     <Container>
       <Header>
-        <Title>{title}</Title>
-        {/* TODO: implement see all */}
+        <Title>{strings.categories[category]}</Title>
         <SeeAllButton
           label={strings.buttons.seeAll}
-          onPress={() => navigation.navigate(EAppScreens.AllSongs, { title })}
+          onPress={() =>
+            navigation.navigate(EAppScreens.AllSongs, { category })
+          }
         />
       </Header>
       <FlatList
