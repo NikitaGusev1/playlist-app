@@ -24,8 +24,12 @@ export const HomeScreenListItem = ({
     <>
       <Button onPress={onPress}>
         <Title>{title}</Title>
-        <TotalLength>{`${minutes}${strings.minutes} ${seconds}${strings.seconds}`}</TotalLength>
-        <Chevron icon={icons.chevrons.right} onPress={onPress} />
+        <Wrapper>
+          {minutes ? (
+            <TotalLength>{`${minutes}${strings.minutes} ${seconds}${strings.seconds}`}</TotalLength>
+          ) : null}
+          <Chevron icon={icons.chevrons.right} onPress={onPress} />
+        </Wrapper>
       </Button>
       <Divider />
     </>
@@ -55,8 +59,12 @@ const Title = styled(MainText)`
 const TotalLength = styled(MainText)`
   ${({ theme }) => css`
     font-size: ${theme.font.size.small};
-    margin-left: auto;
   `}
+`;
+
+const Wrapper = styled.View`
+  margin-left: auto;
+  flex-direction: row;
 `;
 
 const Chevron = styled(IconButton)`
