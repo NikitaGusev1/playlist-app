@@ -5,11 +5,13 @@ import { ICategories, ISong } from '../../typescript/types';
 export interface SongsState {
   data: ICategories | undefined;
   saved: ISong[];
+  downloaded: ISong[];
 }
 
 const initialState: SongsState = {
   data: undefined,
   saved: [],
+  downloaded: [],
 };
 
 export const songsSlice = createSlice({
@@ -18,6 +20,10 @@ export const songsSlice = createSlice({
   reducers: {
     setAllSongs: (state = initialState, action: PayloadAction<ICategories>) => {
       state.data = action.payload;
+    },
+
+    setDownloadedSongs: (state, action: PayloadAction<ISong[]>) => {
+      state.downloaded = action.payload;
     },
 
     saveSong: (state, action: PayloadAction<ISong>) => {
@@ -36,6 +42,7 @@ export const songsSlice = createSlice({
   },
 });
 
-export const { setAllSongs, saveSong, deleteSong } = songsSlice.actions;
+export const { setAllSongs, saveSong, deleteSong, setDownloadedSongs } =
+  songsSlice.actions;
 
 export default songsSlice.reducer;

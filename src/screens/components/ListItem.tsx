@@ -1,9 +1,10 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components/native';
 
 import { icons } from '../../assets/icons';
 import { IconButton } from '../../components/buttons';
+import { useFileSystem } from '../../hooks';
 import { deleteSong, saveSong } from '../../redux/slices/songsSlice';
 import { RootState } from '../../redux/store';
 import { strings } from '../../strings/strings';
@@ -18,6 +19,12 @@ export const ListItem = ({ item }: IProps) => {
   const { title, size, minutes, seconds, artist } = item;
   const dispatch = useDispatch();
   const saved = useSelector((state: RootState) => state.songs.saved);
+  const { downloaded } = useSelector((state: RootState) => state.songs);
+  const { writeFile, readFiles } = useFileSystem();
+
+  useEffect(() => {
+    readFiles();
+  }, []);
 
   const handleSaveToMemory = useCallback(() => {
     if (saved.some(val => val.title === title)) {
@@ -35,6 +42,19 @@ export const ListItem = ({ item }: IProps) => {
     }
   }, [saved, title]);
 
+  const renderDownloadIcon = useMemo(() => {
+    if (downloaded.some(val => val.title === title)) {
+      return icons.checkmark;
+    } else {
+      return icons.download;
+    }
+  }, [downloaded, title]);
+
+  const handleDownload = useCallback(() => {
+    writeFile(item);
+    readFiles();
+  }, [writeFile, readFiles]);
+
   return (
     <>
       <Container>
@@ -49,8 +69,10 @@ export const ListItem = ({ item }: IProps) => {
           icon={renderSaveIcon}
           onPress={handleSaveToMemory}
         />
-        {/* TODO: implement saving to fs */}
-        <SaveToFileSystemButton icon={icons.download} onPress={() => {}} />
+        <SaveToFileSystemButton
+          icon={renderDownloadIcon}
+          onPress={handleDownload}
+        />
       </Container>
       <Divider />
     </>
