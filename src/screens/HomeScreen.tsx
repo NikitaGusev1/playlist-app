@@ -1,11 +1,10 @@
 import { cloneDeep, isEmpty } from 'lodash';
-import React, { useCallback } from 'react';
+import React, { Fragment, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { $enum } from 'ts-enum-util';
 
 import { AppLayout } from '../layouts/AppLayout';
 import { RootState } from '../redux/store';
-import { strings } from '../strings/strings';
 import { ECategories } from '../typescript/statics/ECategories';
 import { Category } from './components/Category';
 
@@ -19,11 +18,11 @@ export const HomeScreen = () => {
       const selected = shuffled?.slice(0, 5);
 
       return (
-        <>
+        <Fragment key={category}>
           {selected && !isEmpty(selected) ? (
-            <Category data={selected} category={category} key={category} />
+            <Category data={selected} category={category} />
           ) : null}
-        </>
+        </Fragment>
       );
     },
     [songsData],

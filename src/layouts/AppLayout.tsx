@@ -22,7 +22,10 @@ export const AppLayout = ({
           {children}
         </ContentView>
       ) : (
-        <Scroll withHeader={withHeader} withPadding={withPadding}>
+        <Scroll
+          withHeader={withHeader}
+          withPadding={withPadding}
+          showsVerticalScrollIndicator={false}>
           {children}
         </Scroll>
       )}

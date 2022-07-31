@@ -27,7 +27,7 @@ export const AllSongsScreen = ({ route, navigation }: IProps) => {
   }, [navigation]);
 
   const renderItem: ListRenderItem<ISong> = useCallback(({ item }) => {
-    return <ListItem item={item} />;
+    return <ListItem item={item} key={item.title} />;
   }, []);
 
   return (

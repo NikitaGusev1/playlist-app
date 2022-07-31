@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components/native';
 
 import { icons } from '../../assets/icons';
 import { IconButton } from '../../components/buttons';
+import { deleteSong, saveSong } from '../../redux/slices/songsSlice';
+import { RootState } from '../../redux/store';
 import { strings } from '../../strings/strings';
 import { ISong } from '../../typescript/types';
 import { MainText } from '../../typography';
@@ -13,6 +16,24 @@ interface IProps {
 
 export const ListItem = ({ item }: IProps) => {
   const { title, size, minutes, seconds, artist } = item;
+  const dispatch = useDispatch();
+  const saved = useSelector((state: RootState) => state.songs.saved);
+
+  const handleSaveToMemory = useCallback(() => {
+    if (saved.some(val => val.title === title)) {
+      dispatch(deleteSong(item));
+    } else {
+      dispatch(saveSong(item));
+    }
+  }, [item, title, dispatch, saved]);
+
+  const renderSaveIcon = useMemo(() => {
+    if (saved.some(val => val.title === title)) {
+      return icons.checkmark;
+    } else {
+      return icons.save;
+    }
+  }, [saved, title]);
 
   return (
     <>
@@ -24,8 +45,10 @@ export const ListItem = ({ item }: IProps) => {
             <Misc>{`${minutes}${strings.minutes} ${seconds}${strings.minutes}`}</Misc>
           </InfoContainer>
         </Wrapper>
-        {/* TODO: implement saving to redux */}
-        <SaveToMemoryButton icon={icons.save} onPress={() => {}} />
+        <SaveToMemoryButton
+          icon={renderSaveIcon}
+          onPress={handleSaveToMemory}
+        />
         {/* TODO: implement saving to fs */}
         <SaveToFileSystemButton icon={icons.download} onPress={() => {}} />
       </Container>
