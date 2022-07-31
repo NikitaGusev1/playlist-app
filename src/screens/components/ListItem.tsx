@@ -62,7 +62,6 @@ const Container = styled.View`
   ${({ theme }) => css`
     padding: ${theme.sizes.getSpacing(2.5)}px ${theme.sizes.appPadding}px;
     align-items: center;
-    flex: 1;
   `}
 `;
 

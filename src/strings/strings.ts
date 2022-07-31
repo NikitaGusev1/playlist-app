@@ -13,4 +13,6 @@ export const strings = {
   megabytes: 'MB',
   minutes: 'm',
   seconds: 's',
+  storage: 'Storage',
+  memory: 'Memory',
 };

@@ -47,6 +47,7 @@ export const Category = ({ data, category }: IProps) => {
 const Container = styled.View`
   ${({ theme }) => css`
     margin-bottom: ${theme.sizes.appPadding}px;
+    padding-horizontal: ${theme.sizes.appPadding}px;
   `}
 `;
 

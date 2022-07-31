@@ -14,17 +14,27 @@ interface IProps extends ScreenProps<EAppScreens.AllSongs> {}
 
 export const AllSongsScreen = ({ route, navigation }: IProps) => {
   const category = route.params?.category;
+  const memorySavedFlag = route.params?.memorySaved;
   const songs = useSelector((state: RootState) => state.songs.data);
+  const savedSongs = useSelector((state: RootState) => state.songs.saved);
 
   const selected = useMemo(() => {
     if (songs) {
-      return songs?.[category];
+      if (memorySavedFlag) {
+        return savedSongs;
+      } else if (category) {
+        return songs?.[category];
+      }
     }
-  }, [songs, category]);
+  }, [songs, category, savedSongs, memorySavedFlag]);
 
   useEffect(() => {
-    navigation.setOptions({ title: strings.categories[category] });
-  }, [navigation]);
+    if (category) {
+      navigation.setOptions({ title: strings.categories[category] });
+    } else if (memorySavedFlag) {
+      navigation.setOptions({ title: strings.memory });
+    }
+  }, [navigation, category]);
 
   const renderItem: ListRenderItem<ISong> = useCallback(({ item }) => {
     return <ListItem item={item} key={item.title} />;

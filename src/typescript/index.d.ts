@@ -15,7 +15,7 @@ type ScreenParamList = {
    * All app screen param types go here. Params are undefined by default for all app screens.
    * example: [EAppScreens.Home]: { step: 0 };
    */
-  [EAppScreens.AllSongs]: { category: ECategories };
+  [EAppScreens.AllSongs]: { category?: ECategories; memorySaved?: boolean };
 };
 
 type NavigationScreensParamList = Override<
