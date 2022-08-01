@@ -71,7 +71,6 @@ const StyledImage = styled(FastImage)<{ width: number; height: number }>`
 const Title = styled(MainText)`
   ${({ theme }) => css`
     margin-bottom: ${theme.sizes.spacing / 2}px;
-    flex: 1;
   `}
 `;
 

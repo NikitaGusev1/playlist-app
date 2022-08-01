@@ -15,4 +15,5 @@ export const strings = {
   seconds: 's',
   storage: 'Storage',
   memory: 'Memory',
+  fileSystem: 'File System',
 };

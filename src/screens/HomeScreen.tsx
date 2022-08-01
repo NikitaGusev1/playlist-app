@@ -11,6 +11,7 @@ import { ScreenProps } from '../typescript';
 import { EAppScreens } from '../typescript/statics/EAppScreens';
 import { ECategories } from '../typescript/statics/ECategories';
 import { HeaderText } from '../typography';
+import { countLength } from '../utils/helpers';
 import { Category } from './components/Category';
 import { HomeScreenListItem } from './components/HomeScreenListItem';
 
@@ -19,22 +20,17 @@ interface IProps extends ScreenProps<EAppScreens.Home> {}
 export const HomeScreen = ({ navigation }: IProps) => {
   const songsData = useSelector((state: RootState) => state.songs.data);
   const savedSongs = useSelector((state: RootState) => state.songs.saved);
+  const downloadedSongs = useSelector(
+    (state: RootState) => state.songs.downloaded,
+  );
 
   const memorySavedLength = useMemo(() => {
-    let totalMinutes: number = 0;
-    let totalSeconds: number = 0;
-
-    savedSongs?.forEach(song => {
-      totalMinutes = totalMinutes + song.minutes;
-      totalSeconds = totalSeconds + song.seconds;
-      if (totalSeconds >= 60) {
-        totalSeconds = totalSeconds - 60;
-        totalMinutes = totalMinutes + 1;
-      }
-    });
-
-    return { totalMinutes, totalSeconds };
+    return countLength(savedSongs);
   }, [savedSongs]);
+
+  const fileSystemSavedLength = useMemo(() => {
+    return countLength(downloadedSongs);
+  }, [downloadedSongs]);
 
   const renderCategory = useCallback(
     (category: ECategories) => {
@@ -65,7 +61,14 @@ export const HomeScreen = ({ navigation }: IProps) => {
           navigation.navigate(EAppScreens.AllSongs, { memorySaved: true })
         }
       />
-      <HomeScreenListItem title={strings.memory} />
+      <HomeScreenListItem
+        title={strings.fileSystem}
+        minutes={fileSystemSavedLength.totalMinutes}
+        seconds={fileSystemSavedLength.totalSeconds}
+        onPress={() =>
+          navigation.navigate(EAppScreens.AllSongs, { fileSystemSaved: true })
+        }
+      />
     </AppLayout>
   );
 };

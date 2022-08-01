@@ -13,7 +13,7 @@ export const useFileSystem = () => {
 
   const writeFile = useCallback(async (item: ISong) => {
     try {
-      const path = RNFS.ExternalDirectoryPath + `/${item.title}.txt`;
+      const path = RNFS.DocumentDirectoryPath + `/${item.title}.txt`;
       const data = JSON.stringify(item);
 
       await RNFS.writeFile(path, data, 'utf8');
@@ -24,7 +24,7 @@ export const useFileSystem = () => {
 
   const readFiles = useCallback(async () => {
     try {
-      const path = RNFS.ExternalDirectoryPath;
+      const path = RNFS.DocumentDirectoryPath;
       if (path) {
         const result = await RNFS.readDir(path);
         const downloaded = result?.map(value => value.name);
@@ -54,7 +54,7 @@ export const useFileSystem = () => {
 
   const deleteFile = useCallback(async (item: ISong) => {
     try {
-      const path = RNFS.ExternalDirectoryPath + `/${item.title}.txt`;
+      const path = RNFS.DocumentDirectoryPath + `/${item.title}.txt`;
 
       await RNFS.unlink(path);
     } catch (error: any) {
