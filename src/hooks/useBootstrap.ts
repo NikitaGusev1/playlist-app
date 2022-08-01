@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import RNBootSplash from 'react-native-bootsplash';
 import { useDispatch } from 'react-redux';
 
 import { categories } from '../../mockData/Categories';
@@ -9,8 +10,8 @@ export const useBootstrap = () => {
   const dispatch = useDispatch();
 
   const runBootstrap = useCallback(() => {
-    // TODO: put Bootsplash fade here
     dispatch(setAllSongs(categories));
+    setTimeout(() => RNBootSplash.hide({ fade: true }), 350);
 
     setIsAppLoaded(true);
   }, [dispatch, categories]);
