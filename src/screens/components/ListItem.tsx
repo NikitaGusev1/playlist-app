@@ -20,7 +20,7 @@ export const ListItem = ({ item }: IProps) => {
   const dispatch = useDispatch();
   const saved = useSelector((state: RootState) => state.songs.saved);
   const { downloaded } = useSelector((state: RootState) => state.songs);
-  const { writeFile, readFiles } = useFileSystem();
+  const { writeFile, readFiles, deleteFile } = useFileSystem();
 
   useEffect(() => {
     readFiles();
@@ -51,9 +51,14 @@ export const ListItem = ({ item }: IProps) => {
   }, [downloaded, title]);
 
   const handleDownload = useCallback(() => {
-    writeFile(item);
+    if (downloaded.some(val => val.title === title)) {
+      deleteFile(item);
+    } else {
+      writeFile(item);
+    }
+
     readFiles();
-  }, [writeFile, readFiles]);
+  }, [writeFile, readFiles, downloaded, title, deleteFile]);
 
   return (
     <>

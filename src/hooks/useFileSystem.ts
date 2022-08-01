@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash';
 import { useCallback } from 'react';
 import RNFS from 'react-native-fs';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +10,7 @@ import { ISong } from '../typescript/types';
 export const useFileSystem = () => {
   const dispatch = useDispatch();
   const songs = useSelector((state: RootState) => state.songs.data);
+
   const writeFile = useCallback(async (item: ISong) => {
     try {
       const path = RNFS.ExternalDirectoryPath + `/${item.title}.txt`;
@@ -21,30 +23,44 @@ export const useFileSystem = () => {
   }, []);
 
   const readFiles = useCallback(async () => {
-    const result = await RNFS.readDir(RNFS.ExternalDirectoryPath);
-    const downloaded = result.map(value => value.name);
-    const newStrings = downloaded.map(val => val.replace('.txt', ''));
-    if (songs) {
-      const values = Object.values(songs);
-      const savedArray: ISong[] = [];
+    try {
+      const path = RNFS.ExternalDirectoryPath;
+      if (path) {
+        const result = await RNFS.readDir(path);
+        const downloaded = result?.map(value => value.name);
+        const newStrings = downloaded?.map(val => val.replace('.txt', ''));
 
-      values.forEach(category => {
-        newStrings.forEach(savedValue => {
-          category.forEach((song: ISong) => {
-            if (song.title === savedValue) {
-              savedArray.push(song);
-            }
+        if (songs && !isEmpty(result)) {
+          const values = Object.values(songs);
+          const savedArray: ISong[] = [];
+
+          values.forEach(category => {
+            newStrings.forEach(savedValue => {
+              category.forEach((song: ISong) => {
+                if (song.title === savedValue) {
+                  savedArray.push(song);
+                }
+              });
+            });
           });
-        });
-      });
 
-      dispatch(setDownloadedSongs(savedArray));
+          dispatch(setDownloadedSongs(savedArray));
+        }
+      }
+    } catch (error: any) {
+      console.log(error.message);
     }
   }, [dispatch]);
 
-  //TODO delete and show on screen
+  const deleteFile = useCallback(async (item: ISong) => {
+    try {
+      const path = RNFS.ExternalDirectoryPath + `/${item.title}.txt`;
 
-  const deleteFile = useCallback(() => {}, []);
+      await RNFS.unlink(path);
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  }, []);
 
-  return { writeFile, readFiles };
+  return { writeFile, readFiles, deleteFile };
 };
